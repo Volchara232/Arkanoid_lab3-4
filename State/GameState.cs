@@ -11,6 +11,8 @@ namespace Arkanoid.State
         public Ball Ball { get; set; } = new Ball();
         public Paddle Paddle { get; set; } = new Paddle();
         public int RandomSeed { get; set; } = 42;
+        public int Lives { get; set; } = 3; //  жизни
+        public bool GameOver { get; set; } = false; //  окончания игры
 
         public GameState() { }
     }

@@ -6,11 +6,12 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Arkanoid;
-using Arkanoid.Core;           // Для Game, Vector2
-using Arkanoid.State;     // Для GameState, Ball, Paddle, Brick, Loot
-using Arkanoid.Enums;     // Для InputCommand
+using Arkanoid.Core;
+using Arkanoid.State;
+using Arkanoid.Enums;
 using Arkanoid.Systems;
 using Arkanoid.Entities;
+using System.Windows.Media.Imaging; // Добавляем для BitmapImage
 
 namespace ArkanoidWPF
 {
@@ -22,7 +23,7 @@ namespace ArkanoidWPF
         private bool _isPaused = false;
         private bool _leftKeyPressed = false;
         private bool _rightKeyPressed = false;
-        private const double Scale = 20.0; // Масштабирование для отрисовки
+        private const double Scale = 20.0;
 
         public MainWindow()
         {
@@ -66,7 +67,9 @@ namespace ArkanoidWPF
                 Field = new GameField(20, 30),
                 Ball = new Ball(new Vector2(10, 15), new Vector2(3, -5)),
                 Paddle = new Paddle(new Vector2(8, 28), new Vector2(4, 1)),
-                RandomSeed = DateTime.Now.Millisecond
+                RandomSeed = DateTime.Now.Millisecond,
+                Lives = 3, // Устанавливаем начальное количество жизней
+                GameOver = false
             };
 
             // Создаем кирпичи
@@ -88,7 +91,7 @@ namespace ArkanoidWPF
                     var brick = new Brick(
                         position,
                         new Vector2(brickWidth, brickHeight),
-                        hitPoints: row + 1, // Разное количество HP для разнообразия
+                        hitPoints: row + 1,
                         lootDropChance: 0.2
                     );
 
@@ -102,7 +105,7 @@ namespace ArkanoidWPF
         private void InitializeTimer()
         {
             _gameTimer = new DispatcherTimer();
-           // _gameTimer.Interval = TimeSpan.FromMilliseconds(1); // ~60 FPS
+            _gameTimer.Interval = TimeSpan.FromMilliseconds(16); // ~60 FPS
             _gameTimer.Tick += GameLoop;
             _gameTimer.Start();
         }
@@ -131,15 +134,91 @@ namespace ArkanoidWPF
 
         private void UpdateGameInfo()
         {
+            if (_game == null) return;
+
             BallInfo.Text = $"({_game.State.Ball.Position.X:0.0}, {_game.State.Ball.Position.Y:0.0})";
             PaddleInfo.Text = $"({_game.State.Paddle.Position.X:0.0}, {_game.State.Paddle.Position.Y:0.0})";
             BricksInfo.Text = _game.State.Bricks.Count.ToString();
             LootsInfo.Text = _game.State.Loots.Count.ToString();
+
+            // Обновляем счетчик жизней
+            LivesInfo.Text = _game.State.Lives.ToString();
+
+            // Показываем/скрываем панель окончания игры
+            if (_game.State.GameOver)
+            {
+                GameOverPanel.Visibility = Visibility.Visible;
+
+                if (_game.State.Bricks.Count == 0)
+                {
+                    GameOverText.Text = "ПОБЕДА!";
+                    GameOverPanel.Background = new SolidColorBrush(Color.FromArgb(255, 0, 100, 0));
+                    StatusText.Text = "ПОБЕДА! Все кирпичи разрушены!";
+                }
+                else if (_game.State.Lives <= 0)
+                {
+                    GameOverText.Text = "ИГРА ОКОНЧЕНА";
+                    GameOverPanel.Background = new SolidColorBrush(Color.FromArgb(255, 139, 0, 0));
+                    StatusText.Text = "ИГРА ОКОНЧЕНА! Нажмите R для новой игры.";
+                }
+
+                // Деактивируем кнопки при окончании игры
+                BtnPause.IsEnabled = false;
+                BtnSave.IsEnabled = false;
+            }
+            else
+            {
+                GameOverPanel.Visibility = Visibility.Collapsed;
+                BtnPause.IsEnabled = true;
+                BtnSave.IsEnabled = true;
+
+                // Обновляем статус игры
+                if (_isPaused)
+                    StatusText.Text = "Игра на паузе";
+                else
+                    StatusText.Text = "Игра запущена";
+            }
         }
 
         private void DrawGame()
         {
             GameCanvas.Children.Clear();
+
+            if (_game == null) return;
+
+            // Если игра окончена, показываем сообщение на Canvas
+            if (_game.State.GameOver)
+            {
+                var gameOverText = new TextBlock
+                {
+                    Text = _game.State.Lives <= 0 ? "ИГРА ОКОНЧЕНА" : "ПОБЕДА!",
+                    Foreground = _game.State.Lives <= 0 ? Brushes.Red : Brushes.Lime,
+                    FontSize = 36,
+                    FontWeight = FontWeights.Bold,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+
+                // Центрируем текст
+                Canvas.SetLeft(gameOverText, (GameCanvas.ActualWidth / 2) - 120);
+                Canvas.SetTop(gameOverText, (GameCanvas.ActualHeight / 2) - 25);
+                GameCanvas.Children.Add(gameOverText);
+
+                var restartText = new TextBlock
+                {
+                    Text = "Нажмите R для новой игры",
+                    Foreground = Brushes.White,
+                    FontSize = 18,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+
+                Canvas.SetLeft(restartText, (GameCanvas.ActualWidth / 2) - 120);
+                Canvas.SetTop(restartText, (GameCanvas.ActualHeight / 2) + 25);
+                GameCanvas.Children.Add(restartText);
+
+                return; // Не рисуем игру если она окончена
+            }
 
             // Рисуем границы поля
             var border = new Rectangle
@@ -170,13 +249,13 @@ namespace ArkanoidWPF
                 GameCanvas.Children.Add(rect);
 
                 // Показываем HP на кирпиче
-                var text = new System.Windows.Controls.TextBlock
+                var text = new TextBlock
                 {
                     Text = brick.HitPoints.ToString(),
                     Foreground = Brushes.White,
                     FontWeight = FontWeights.Bold,
-                    HorizontalAlignment = System.Windows.HorizontalAlignment.Center,
-                    VerticalAlignment = System.Windows.VerticalAlignment.Center
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    VerticalAlignment = VerticalAlignment.Center
                 };
                 Canvas.SetLeft(text, brick.Position.X * Scale + brick.Size.X * Scale / 2 - 8);
                 Canvas.SetTop(text, brick.Position.Y * Scale + brick.Size.Y * Scale / 2 - 8);
@@ -322,6 +401,9 @@ namespace ArkanoidWPF
                 _isPaused = false;
                 BtnPause.Content = "Пауза (P)";
                 StatusText.Text = "Новая игра";
+                GameOverPanel.Visibility = Visibility.Collapsed;
+                BtnPause.IsEnabled = true;
+                BtnSave.IsEnabled = true;
             }
         }
 
@@ -352,6 +434,13 @@ namespace ArkanoidWPF
                     StatusText.Text = "Игра загружена";
                     MessageBox.Show("Игра успешно загружена!", "Загрузка",
                         MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    // Сбрасываем состояние UI
+                    _isPaused = false;
+                    BtnPause.Content = "Пауза (P)";
+                    GameOverPanel.Visibility = Visibility.Collapsed;
+                    BtnPause.IsEnabled = true;
+                    BtnSave.IsEnabled = true;
                 }
                 else
                 {

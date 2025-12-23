@@ -97,8 +97,99 @@
     },
     {
       "Position": {
-        "X": 16.400000000000002,
+        "X": 1,
+        "Y": 2.2
+      },
+      "Size": {
+        "X": 2,
         "Y": 1
+      },
+      "HitPoints": 2,
+      "LootDropChance": 0.2,
+      "IsDestroyed": false
+    },
+    {
+      "Position": {
+        "X": 3.2,
+        "Y": 2.2
+      },
+      "Size": {
+        "X": 2,
+        "Y": 1
+      },
+      "HitPoints": 2,
+      "LootDropChance": 0.2,
+      "IsDestroyed": false
+    },
+    {
+      "Position": {
+        "X": 5.4,
+        "Y": 2.2
+      },
+      "Size": {
+        "X": 2,
+        "Y": 1
+      },
+      "HitPoints": 2,
+      "LootDropChance": 0.2,
+      "IsDestroyed": false
+    },
+    {
+      "Position": {
+        "X": 7.6000000000000005,
+        "Y": 2.2
+      },
+      "Size": {
+        "X": 2,
+        "Y": 1
+      },
+      "HitPoints": 2,
+      "LootDropChance": 0.2,
+      "IsDestroyed": false
+    },
+    {
+      "Position": {
+        "X": 9.8,
+        "Y": 2.2
+      },
+      "Size": {
+        "X": 2,
+        "Y": 1
+      },
+      "HitPoints": 2,
+      "LootDropChance": 0.2,
+      "IsDestroyed": false
+    },
+    {
+      "Position": {
+        "X": 12,
+        "Y": 2.2
+      },
+      "Size": {
+        "X": 2,
+        "Y": 1
+      },
+      "HitPoints": 2,
+      "LootDropChance": 0.2,
+      "IsDestroyed": false
+    },
+    {
+      "Position": {
+        "X": 14.200000000000001,
+        "Y": 2.2
+      },
+      "Size": {
+        "X": 2,
+        "Y": 1
+      },
+      "HitPoints": 2,
+      "LootDropChance": 0.2,
+      "IsDestroyed": false
+    },
+    {
+      "Position": {
+        "X": 16.400000000000002,
+        "Y": 2.2
       },
       "Size": {
         "X": 2,
@@ -111,110 +202,6 @@
     {
       "Position": {
         "X": 1,
-        "Y": 2.2
-      },
-      "Size": {
-        "X": 2,
-        "Y": 1
-      },
-      "HitPoints": 2,
-      "LootDropChance": 0.2,
-      "IsDestroyed": false
-    },
-    {
-      "Position": {
-        "X": 3.2,
-        "Y": 2.2
-      },
-      "Size": {
-        "X": 2,
-        "Y": 1
-      },
-      "HitPoints": 2,
-      "LootDropChance": 0.2,
-      "IsDestroyed": false
-    },
-    {
-      "Position": {
-        "X": 5.4,
-        "Y": 2.2
-      },
-      "Size": {
-        "X": 2,
-        "Y": 1
-      },
-      "HitPoints": 2,
-      "LootDropChance": 0.2,
-      "IsDestroyed": false
-    },
-    {
-      "Position": {
-        "X": 7.6000000000000005,
-        "Y": 2.2
-      },
-      "Size": {
-        "X": 2,
-        "Y": 1
-      },
-      "HitPoints": 2,
-      "LootDropChance": 0.2,
-      "IsDestroyed": false
-    },
-    {
-      "Position": {
-        "X": 9.8,
-        "Y": 2.2
-      },
-      "Size": {
-        "X": 2,
-        "Y": 1
-      },
-      "HitPoints": 2,
-      "LootDropChance": 0.2,
-      "IsDestroyed": false
-    },
-    {
-      "Position": {
-        "X": 12,
-        "Y": 2.2
-      },
-      "Size": {
-        "X": 2,
-        "Y": 1
-      },
-      "HitPoints": 2,
-      "LootDropChance": 0.2,
-      "IsDestroyed": false
-    },
-    {
-      "Position": {
-        "X": 14.200000000000001,
-        "Y": 2.2
-      },
-      "Size": {
-        "X": 2,
-        "Y": 1
-      },
-      "HitPoints": 2,
-      "LootDropChance": 0.2,
-      "IsDestroyed": false
-    },
-    {
-      "Position": {
-        "X": 16.400000000000002,
-        "Y": 2.2
-      },
-      "Size": {
-        "X": 2,
-        "Y": 1
-      },
-      "HitPoints": 2,
-      "LootDropChance": 0.2,
-      "IsDestroyed": false
-    },
-    {
-      "Position": {
-        "X": 1,
         "Y": 3.4
       },
       "Size": {
@@ -416,7 +403,7 @@
         "X": 2,
         "Y": 1
       },
-      "HitPoints": 4,
+      "HitPoints": 3,
       "LootDropChance": 0.2,
       "IsDestroyed": false
     },
@@ -429,7 +416,7 @@
         "X": 2,
         "Y": 1
       },
-      "HitPoints": 5,
+      "HitPoints": 3,
       "LootDropChance": 0.2,
       "IsDestroyed": false
     },
@@ -468,7 +455,7 @@
         "X": 2,
         "Y": 1
       },
-      "HitPoints": 5,
+      "HitPoints": 4,
       "LootDropChance": 0.2,
       "IsDestroyed": false
     },
@@ -507,7 +494,7 @@
         "X": 2,
         "Y": 1
       },
-      "HitPoints": 5,
+      "HitPoints": 4,
       "LootDropChance": 0.2,
       "IsDestroyed": false
     },
@@ -520,7 +507,7 @@
         "X": 2,
         "Y": 1
       },
-      "HitPoints": 5,
+      "HitPoints": 4,
       "LootDropChance": 0.2,
       "IsDestroyed": false
     }
@@ -528,12 +515,12 @@
   "Loots": [],
   "Ball": {
     "Position": {
-      "X": 10.498909900000001,
-      "Y": 14.1684835
+      "X": 18.71687447506761,
+      "Y": 16.34760078518774
     },
     "Velocity": {
-      "X": 3,
-      "Y": -5
+      "X": -0.26691718591908786,
+      "Y": 5.824839501296241
     },
     "Size": {
       "X": 0.8,
@@ -542,7 +529,7 @@
   },
   "Paddle": {
     "Position": {
-      "X": 8,
+      "X": 8.329751,
       "Y": 28
     },
     "Size": {
@@ -551,5 +538,5 @@
     },
     "Speed": 10
   },
-  "RandomSeed": 139
+  "RandomSeed": 797
 }

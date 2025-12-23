@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\1\source\repos\Arkanoid_lab3-4\Arkanoid_lab3-4\obj\Release\net9.0-windows\
+D:\МНТ\вуз\Lab 3\obj\Release\net9.0-windows\
 Arkanoid_lab3_4
 none
 false
-TRACE;RELEASE;NET;NET9_0;NETCOREAPP
-C:\Users\1\source\repos\Arkanoid_lab3-4\Arkanoid_lab3-4\App.xaml
+TRACE;RELEASE;NET;NET9_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;WINDOWS7_0_OR_GREATER
+D:\МНТ\вуз\Lab 3\App.xaml
 11407045341
 
 221598153121
-200-423684338
+200-1531957912
 MainWindow.xaml;
 
 True
